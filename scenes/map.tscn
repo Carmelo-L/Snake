@@ -1,7 +1,34 @@
 [gd_scene format=3 uid="uid://cksypktoafn7c"]
 
+[ext_resource type="Script" uid="uid://cvhs8mfuie8i6" path="res://scripts/map.gd" id="1_gldc4"]
+[ext_resource type="Texture2D" uid="uid://cdmquk5e2ahkm" path="res://assets/map/items/apple.png" id="2_0cso3"]
+[ext_resource type="Texture2D" uid="uid://bihnw8afrnnh7" path="res://assets/map/tiles/Tile1.png" id="2_gldc4"]
+[ext_resource type="Texture2D" uid="uid://dgcg4wcttmigj" path="res://assets/map/tiles/Tile2.png" id="3_0cso3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2klcf"]
+texture = ExtResource("2_gldc4")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2lpho"]
+texture = ExtResource("3_0cso3")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_2lpho"]
+sources/0 = SubResource("TileSetAtlasSource_2klcf")
+sources/1 = SubResource("TileSetAtlasSource_2lpho")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nakos"]
+texture = ExtResource("2_0cso3")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jh32y"]
+sources/0 = SubResource("TileSetAtlasSource_nakos")
+
 [node name="Map" type="Node2D" unique_id=1545098275]
+script = ExtResource("1_gldc4")
 
-[node name="items" type="TileMapLayer" parent="." unique_id=778464758]
+[node name="Map - background" type="TileMapLayer" parent="." unique_id=1320743063]
+tile_set = SubResource("TileSet_2lpho")
 
-[node name="background" type="TileMapLayer" parent="." unique_id=1320743063]
+[node name="Map - items" type="TileMapLayer" parent="." unique_id=778464758]
+tile_set = SubResource("TileSet_jh32y")

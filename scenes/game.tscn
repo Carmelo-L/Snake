@@ -1,7 +1,14 @@
 [gd_scene format=3 uid="uid://dsqm68wyrv1vg"]
 
 [ext_resource type="PackedScene" uid="uid://cksypktoafn7c" path="res://scenes/map.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://ctcmxt60s7l22" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://cpuyqxod6nul5" path="res://scenes/snake_character.tscn" id="3_lnu2h"]
 
 [node name="Game" type="Node2D" unique_id=1206241517]
+script = ExtResource("1_yqjtg")
 
 [node name="Map" parent="." unique_id=1545098275 instance=ExtResource("1_uwrxv")]
+
+[node name="snake_character" parent="." unique_id=1447224629 instance=ExtResource("3_lnu2h")]
+position = Vector2(8, 8)
+motion_mode = 1
