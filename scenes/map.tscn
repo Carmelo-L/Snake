@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cksypktoafn7c"]
+
+[node name="Map" type="Node2D" unique_id=1545098275]
+
+[node name="items" type="TileMapLayer" parent="." unique_id=778464758]
+
+[node name="background" type="TileMapLayer" parent="." unique_id=1320743063]
