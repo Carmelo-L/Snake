@@ -10,4 +10,5 @@ script = ExtResource("1_yqjtg")
 [node name="Map" parent="." unique_id=1545098275 instance=ExtResource("1_uwrxv")]
 
 [node name="snake_character" parent="." unique_id=1447224629 instance=ExtResource("3_lnu2h")]
+position = Vector2(32, 32)
 motion_mode = 1
