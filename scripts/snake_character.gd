@@ -6,6 +6,8 @@ const TILE_PIX: int = 16
 const ONE_DP: float = 0.1
 const REVERSE: int 	= -1
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 var speed: int 				= 50
 var direction: Direction 	= Direction.RIGHT;
 var directional_speed: int 	= speed
@@ -16,17 +18,24 @@ var movement_queue: Array[Dictionary] = []
 #	"directional_speed": 0,
 #}
 
+
+func _is_direction_vertical(direction: Direction) -> bool:
+	return direction == Direction.UP or direction == Direction.DOWN
+
+func _is_direction_horizontal(direction: Direction) -> bool:
+	return direction == Direction.LEFT or direction == Direction.RIGHT
+
 func _move_snake(delta: float) -> void:
-	if direction == Direction.UP or direction == Direction.DOWN:
+	if _is_direction_vertical(direction):
 		position.y += directional_speed * delta
-	elif direction == Direction.LEFT or direction == Direction.RIGHT:
+	elif _is_direction_horizontal(direction):
 		position.x += directional_speed * delta
 
 func _is_valid_turn(new_direction: Direction) -> bool:
-	if direction == Direction.UP or direction == Direction.DOWN:
+	if _is_direction_vertical(direction):
 		if new_direction == Direction.LEFT or new_direction == Direction.RIGHT:
 			return true
-	elif direction == Direction.LEFT or direction == Direction.RIGHT:
+	elif _is_direction_horizontal(direction):
 		if new_direction == Direction.UP or new_direction == Direction.DOWN:
 			return true
 	return false
@@ -34,7 +43,7 @@ func _is_valid_turn(new_direction: Direction) -> bool:
 # Gets remainder of the division between the axis position and the pixel width of a tile
 	# This tells us how far within a tile the snake has travelled 
 	# This info is then used to find the start and end of the current tile 
-	# and return which one the snake is closest to
+	# and return which one the snake is closest to. Only works on positive directions (DOWN, RIGHT)
 	# e.g. if the snake's x position is 33.34554, it means it is 1.34554 pixels into a tile which starts at 
 	# 32 pixels and ends at 48 pixels
 func _positive_turn(pos: float) -> float:
@@ -56,12 +65,16 @@ func _turn_snake(new_direction: Direction, new_d_speed: int) -> void:
 	
 	if direction == Direction.UP:
 		position.y = _negative_turn(position.y)
+		animation_player._rotate_left()
 	elif direction == Direction.DOWN:
 		position.y = _positive_turn(position.y)
+		animation_player._rotate_right()
 	elif direction == Direction.LEFT:
 		position.x = _negative_turn(position.x)
+		animation_player._rotate_left()
 	elif direction == Direction.RIGHT:
 		position.x = _positive_turn(position.x)
+		animation_player._rotate_right()
 
 	direction = new_direction
 	directional_speed = new_d_speed
